@@ -1,13 +1,11 @@
-
-"use client"; // Necesario: controla <dialog> nativo con showModal()/close()
-
+"use client"; 
 import { useEffect, useRef } from "react";
 import { ActionButton } from "./action-button";
 
 interface Props {
   open: boolean;
-  /** Nombre del archivo que se va a entregar */
-  fileName: string;
+  /** Nombre de la entrega, ej. "Taller 02: Componentes RSC" */
+  itemName: string;
   title?: string;
   isLoading?: boolean;
   onConfirm: () => void;
@@ -16,8 +14,8 @@ interface Props {
 
 export function SubmissionConfirmModal({
   open,
-  fileName,
-  title = "¿Enviar entrega definitiva?",
+  itemName,
+  title = "¿Confirmar entrega definitiva?",
   isLoading = false,
   onConfirm,
   onCancel,
@@ -61,16 +59,20 @@ export function SubmissionConfirmModal({
             <h3 id="confirm-modal-title" className="text-lg font-bold">
               {title}
             </h3>
-            <p className="py-2 text-sm">
-              Vas a enviar <span className="font-semibold">{fileName}</span>. Esta acción es
-              irreversible: una vez enviado no podrás modificarlo.
+            <p className="py-2 text-sm opacity-80">
+              Estás a punto de entregar el <span className="font-semibold">{itemName}</span>. Una
+              vez confirmado no podrás modificar los archivos.
             </p>
           </div>
         </div>
 
         <div className="modal-action">
           <ActionButton label="Cancelar" variant="ghost" onClick={onCancel} disabled={isLoading} />
-          <ActionButton label="Enviar definitivamente" onClick={onConfirm} isLoading={isLoading} />
+          <ActionButton
+            label="Sí, Enviar Definitivamente"
+            onClick={onConfirm}
+            isLoading={isLoading}
+          />
         </div>
       </div>
 

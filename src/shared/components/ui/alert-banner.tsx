@@ -49,11 +49,11 @@ export function AlertBanner({
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={iconPath[tone]} />
       </svg>
       <div className="text-left">
-        <h3 className="font-bold">{title}</h3>
-        <p className="text-sm">{children}</p>
+        <h3 className="font-bold text-base-content">{title}</h3>
+        <p className="text-xs text-base-content/70 sm:text-sm">{children}</p>
       </div>
       {actionLabel && actionHref && (
-        <Link href={actionHref} className="btn btn-sm btn-outline">
+        <Link href={actionHref} className="btn btn-sm btn-outline btn-primary">
           {actionLabel}
         </Link>
       )}

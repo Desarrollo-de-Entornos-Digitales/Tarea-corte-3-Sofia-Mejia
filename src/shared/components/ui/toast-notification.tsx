@@ -1,16 +1,15 @@
-
-"use client"; // Necesario: estado interno de visibilidad (useState)
+"use client"; 
 
 import { useState } from "react";
 
 interface Props {
-  message: string;
-  /** Identificador de transacción o commit (ej. "a3f9c21") */
-  transactionId?: string;
+  title: string;
+  /** Descripción o identificador de commit/transacción */
+  description?: string;
   onDismiss?: () => void;
 }
 
-export function ToastNotification({ message, transactionId, onDismiss }: Props) {
+export function ToastNotification({ title, description, onDismiss }: Props) {
   const [visible, setVisible] = useState(true);
 
   if (!visible) return null;
@@ -21,16 +20,16 @@ export function ToastNotification({ message, transactionId, onDismiss }: Props) 
   };
 
   return (
-    <div className="toast toast-bottom toast-end z-50 max-w-[calc(100vw-2rem)]">
+    <div className="toast toast-bottom toast-center z-50 max-w-[calc(100vw-2rem)] sm:toast-end">
       <div
         role="status"
         aria-live="polite"
-        className="flex w-80 max-w-full items-start gap-3 rounded-box border border-base-300 bg-base-100 p-4 shadow-lg"
+        className="flex w-80 max-w-full items-center gap-3 rounded-box border border-success bg-base-100 p-3 shadow-lg"
       >
-        <span className="grid size-10 shrink-0 place-items-center rounded-full bg-success text-success-content">
+        <span className="grid size-8 shrink-0 place-items-center rounded-full bg-success text-success-content">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="size-5"
+            className="size-4"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -41,10 +40,8 @@ export function ToastNotification({ message, transactionId, onDismiss }: Props) 
         </span>
 
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-semibold">{message}</p>
-          {transactionId && (
-            <p className="mt-1 truncate font-mono text-xs opacity-70">ID: {transactionId}</p>
-          )}
+          <p className="text-sm font-bold">{title}</p>
+          {description && <p className="text-xs opacity-70">{description}</p>}
         </div>
 
         <button

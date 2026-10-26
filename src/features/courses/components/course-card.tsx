@@ -5,11 +5,12 @@ interface Props {
   title: string;
   credits: number;
   professor: string;
+  group: string;
   room: string;
   /** Avance del semestre, de 0 a 100 */
   progress?: number;
   href: string;
-  programHref?: string;
+  syllabusHref?: string;
 }
 
 export function CourseCard({
@@ -17,10 +18,11 @@ export function CourseCard({
   title,
   credits,
   professor,
+  group,
   room,
   progress = 0,
   href,
-  programHref,
+  syllabusHref,
 }: Props) {
   const safeProgress = Math.min(100, Math.max(0, progress));
 
@@ -28,45 +30,42 @@ export function CourseCard({
     <article className="card w-full overflow-hidden bg-base-100 shadow-sm card-border sm:max-w-sm">
       <header className="bg-linear-to-r from-primary to-secondary p-4 text-primary-content">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-sm font-medium opacity-90">{code}</span>
-          <span className="badge badge-accent">{credits} créditos</span>
+          <span className="badge badge-outline border-primary-content/60 font-mono text-primary-content">
+            {code}
+          </span>
+          <span className="badge badge-accent badge-sm font-bold">{credits} Créditos</span>
         </div>
-        <h2 className="mt-2 text-lg font-bold">{title}</h2>
       </header>
 
       <div className="card-body gap-4 p-4">
-        <dl className="grid grid-cols-2 gap-3 text-sm">
-          <div>
-            <dt className="opacity-70">Docente</dt>
-            <dd className="font-semibold">{professor}</dd>
-          </div>
-          <div>
-            <dt className="opacity-70">Salón</dt>
-            <dd className="font-semibold">{room}</dd>
-          </div>
-        </dl>
+        <div>
+          <h2 className="text-lg font-bold leading-tight">{title}</h2>
+          <p className="text-xs opacity-70">
+            {professor} • Grupo {group} • Salón {room}
+          </p>
+        </div>
 
         <div>
           <div className="mb-1 flex justify-between text-xs">
-            <span>Progreso del semestre</span>
+            <span>Avance de Semestre</span>
             <span className="font-semibold">{safeProgress}%</span>
           </div>
           <progress
             className="progress progress-primary w-full"
             value={safeProgress}
             max={100}
-            aria-label="Progreso del semestre"
+            aria-label="Avance del semestre"
           />
         </div>
 
-        <div className="card-actions justify-end">
-          {programHref && (
-            <Link href={programHref} className="btn btn-ghost btn-sm">
-              Ver programa
+        <div className="card-actions items-center justify-end">
+          {syllabusHref && (
+            <Link href={syllabusHref} className="btn btn-ghost btn-sm">
+              Sílabo
             </Link>
           )}
           <Link href={href} className="btn btn-primary btn-sm">
-            Ir al curso
+            Entrar al Aula
           </Link>
         </div>
       </div>

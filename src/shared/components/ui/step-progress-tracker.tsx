@@ -11,19 +11,17 @@ interface Props {
 
 export function StepProgressTracker({ steps }: Props) {
   return (
-    <ol className="steps steps-vertical w-full sm:steps-horizontal" aria-label="Hitos de entrega">
-      {steps.map((step) => (
+    <ol className="steps w-full text-xs sm:text-sm" aria-label="Hitos de entrega">
+      {steps.map((step, index) => (
         <li
           key={step.label}
           aria-current={step.status === "active" ? "step" : undefined}
-          data-content={
-            step.status === "completed" ? "✓" : step.status === "active" ? "●" : undefined
-          }
+          data-content={step.status === "completed" ? "✓" : index + 1}
           className={`step ${step.status !== "pending" ? "step-primary" : ""}`}
         >
-          <span className="flex flex-col items-start gap-1 sm:items-center">
-            <span className={step.status === "active" ? "font-bold" : ""}>{step.label}</span>
-            {step.status === "active" && <span className="badge badge-accent badge-xs">Hoy</span>}
+          <span className={step.status === "active" ? "font-bold" : "opacity-70"}>
+            {step.label}
+            {step.status === "active" && " (Hoy)"}
           </span>
         </li>
       ))}

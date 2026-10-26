@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 
 interface MenuItem {
@@ -8,6 +7,8 @@ interface MenuItem {
 
 interface Props {
   portalName?: string;
+  /** Iniciales del logo institucional */
+  logoText?: string;
   period: string;
   notifications?: number;
   userName: string;
@@ -16,6 +17,7 @@ interface Props {
 
 export function AcademicAppNavbar({
   portalName = "Portal Académico",
+  logoText = "i",
   period,
   notifications = 0,
   userName,
@@ -23,15 +25,13 @@ export function AcademicAppNavbar({
 }: Props) {
   return (
     <header className="navbar border-b border-base-300 bg-base-100 px-4">
-      <div className="flex flex-1 items-center gap-3">
-        <Link href="/" aria-label="Ir al inicio" className="flex items-center gap-3">
-          <span className="grid size-10 place-items-center rounded-box bg-primary font-bold text-primary-content">
-            i
+      <div className="flex flex-1 items-center">
+        <Link href="/" aria-label="Ir al inicio" className="flex items-center gap-2">
+          <span className="grid size-9 place-items-center rounded-box bg-primary text-sm font-bold text-primary-content">
+            {logoText}
           </span>
-          <span className="leading-tight">
-            <span className="block font-bold">{portalName}</span>
-            <span className="hidden text-xs opacity-70 sm:block">{period}</span>
-          </span>
+          <span className="font-bold">{portalName}</span>
+          <span className="badge badge-ghost badge-sm">{period}</span>
         </Link>
       </div>
 
@@ -70,7 +70,7 @@ export function AcademicAppNavbar({
             className="btn btn-ghost btn-circle avatar avatar-placeholder"
             aria-label={`Menú de ${userName}`}
           >
-            <div className="w-10 rounded-full bg-base-200 text-primary ring-2 ring-primary">
+            <div className="w-9 rounded-full bg-base-200 text-primary ring-2 ring-primary">
               <span className="font-bold">{userName.charAt(0).toUpperCase()}</span>
             </div>
           </div>

@@ -50,7 +50,6 @@ export function ActionButton({
   ...rest
 }: Props) {
   return (
-    
     <button
       type={type}
       disabled={disabled || isLoading}
